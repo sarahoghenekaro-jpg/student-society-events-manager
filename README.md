@@ -1,0 +1,1 @@
+I am a student society executive trying to sell tickets for an event being organized by my society, but I am unable to organize sales because students/alumni/staff have differently priced tickets which makes organization in general frustrating.
