@@ -34,6 +34,13 @@ jobs:
           cache: npm
           cache-dependency-path: backend/package-lock.json
       - run: npm ci
+      - name: Debug eslint install
+        run: |
+          node -v
+          npm -v
+          ls -l node_modules/.bin/eslint || true
+          ls -l node_modules/eslint/bin/eslint.js || true
+          ls node_modules | wc -l
       - run: npm run lint
       - run: npx node-pg-migrate up
       - run: npm test
