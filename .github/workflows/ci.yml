@@ -15,7 +15,7 @@ jobs:
         image: postgres:16
         env:
           POSTGRES_USER: app
-          POSTGRES_PASSWORD: app
+          POSTGRES_PASSWORD: devpassword
           POSTGRES_DB: app
         ports:
           - 5432:5432
@@ -34,13 +34,18 @@ jobs:
           cache: npm
           cache-dependency-path: backend/package-lock.json
       - run: npm ci
-      - name: Debug eslint install
+      - name: Debug dependencies
         run: |
           node -v
           npm -v
-          ls -l node_modules/.bin/eslint || true
-          ls -l node_modules/eslint/bin/eslint.js || true
-          ls node_modules | wc -l
-      - run: npm run lint
-      - run: npx node-pg-migrate up
-      - run: npm test
+          ls -l node_modules/.bin/node-pg-migrate || true
+          ls -l node_modules/node-pg-migrate/bin/ || true
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run database migrations
+        run: node ./node_modules/node-pg-migrate/bin/node-pg-migrate.js up
+
+      - name: Run tests
+        run: npm test
