@@ -25,7 +25,7 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     env:
-      DATABASE_URL: postgres://app:app@localhost:5432/app
+      DATABASE_URL: postgres://app:devpassword@localhost:5432/app
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
